@@ -1,5 +1,5 @@
 # CSC 330 Programming Languages
-## Standard ML
+## Standard ML (Unit 1)
 Assignments 1 through 3 are done in Standard ML.
 
 Topics covered include:
@@ -19,7 +19,7 @@ Topics covered include:
 * Data types
 * Type checking
 * Currying
-## Racket
+## Racket (Unit 2)
 Upcomming.
-## Ruby
+## Ruby (Unit 3)
 Upcomming
