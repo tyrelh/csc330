@@ -50,11 +50,13 @@ fun g f1 f2 p =
 
 
 (* 1 *)
+(* val only_capitals = fn : string list -> string list *)
 fun only_capitals lst =
 	List.filter (fn s => Char.isUpper(String.sub(s, 0))) lst
 
 
 (* 2 *)
+(* val longest_string1 = fn : string list -> string *)
 fun longest_string1 lst =
 	case lst of
 		[] => ""
@@ -69,6 +71,7 @@ fun longest_string1 lst =
 
 
 (* 3 *)
+(* val longest_string2 = fn : string list -> string *)
 fun longest_string2 lst =
 	case lst of
 		[] => ""
@@ -83,6 +86,7 @@ fun longest_string2 lst =
 
 
 (* 4 *)
+(* val longest_string_helper = fn : (int * int -> bool) -> string list -> string *)
 fun longest_string_helper f =
 	foldl (
 		fn (a, b) =>
@@ -91,12 +95,14 @@ fun longest_string_helper f =
 			else b
 	) ""
 
+(* val longest_string3 = fn : string list -> string *)
 val longest_string3 = 
 	longest_string_helper (
 		fn (a, b) =>
 			a > b
 	)
 
+(* val longest_string4 = fn : string list -> string *)
 val longest_string4 = 
 	longest_string_helper (
 		fn (a, b) =>
@@ -105,15 +111,18 @@ val longest_string4 =
 
 
 (* 5 *)
+(* val longest_capitalized = fn : string list -> string *)
 val longest_capitalized = longest_string3 o only_capitals
 
 
 (* 6 *)
+(* val rev_string = fn : string -> string *)
 val rev_string = String.implode o List.rev o String.explode 
 
 
 
 (* 7 *)
+(* val first_answer = fn : ('a -> 'b option) -> 'a list -> 'b *)
 fun first_answer f lst =
 	case lst of
 		[] => raise NoAnswer
@@ -125,6 +134,7 @@ fun first_answer f lst =
 
 
 (* 8 *)
+(* val all_answers = fn : ('a -> 'b list option) -> 'a list -> 'b list option *)
 fun all_answers f l =
 	let
 		fun aux (lst, acc) =
@@ -142,19 +152,23 @@ fun all_answers f l =
 (* 9 *)
 
 (* b *)
+(* val count_wildcards = fn : pattern -> int *)
 fun count_wildcards p =
 	g (fn _ => 1) (fn _ => 0) p
 
 (* c *)
+(* val count_wild_and_variable_lengths = fn : pattern -> int *)
 fun count_wild_and_variable_lengths p =
 	g (fn _ => 1) (fn x => String.size x) p
 
 (* d *)
+(* val count_some_var = fn : string * pattern -> int *)
 fun count_some_var (s, p) =
 	g (fn _ => 0) (fn x => if x = s then 1 else 0) p
 
 
 (* 10 *)
+(* val check_pat = fn : pattern -> bool *)
 fun check_pat p =
 	let
 	  	fun builder (pat) =
@@ -174,6 +188,7 @@ fun check_pat p =
 
 
 (* 11 *)
+(* val match = fn : valu * pattern -> (string * valu) list option *)
 fun match (v, p) =
 	case p of
 		Wildcard => SOME []
@@ -211,6 +226,7 @@ fun match (v, p) =
 
 
 (* 12 *)
+(* val first_match = fn : valu -> pattern list -> (string * valu) list option *)
 fun first_match v l = 
 	let fun make_curried f x y = f (x, y)
 	in SOME (first_answer (make_curried match v) l) handle NoAnswer => NONE end
