@@ -109,7 +109,8 @@ val longest_capitalized = longest_string3 o only_capitals
 
 
 (* 6 *)
-val rev_string = String.implode o List.rev o String.explode
+val rev_string = String.implode o List.rev o String.explode 
+
 
 
 (* 7 *)
@@ -117,9 +118,10 @@ fun first_answer f lst =
 	case lst of
 		[] => raise NoAnswer
 		| a::b =>
-			case f a of
+			(case f a of
 				SOME v => v
 				| NONE => first_answer f b
+			)
 
 
 (* 8 *)
@@ -209,5 +211,6 @@ fun match (v, p) =
 
 
 (* 12 *)
+fun first_match v l = 
 	let fun make_curried f x y = f (x, y)
 	in SOME (first_answer (make_curried match v) l) handle NoAnswer => NONE end
