@@ -5,3 +5,9 @@
 *.html
 *.zip
 *.xhtml
+*.jpg
+*.dep
+*.zo
+*test.rkt
+*test_2.rkt
+*tests.rkt
