@@ -1,0 +1,70 @@
+Tyrel Hiebert
+Challenge Question
+
+For the challenge question, I added a "next block" preview above the play area.
+
+Logically, the main thing I needed to change was to make the game have a "current"
+block and a "next" block. Whenever a block is placed and a new block is needed, 
+the "next" block becomes the "current" block, and the "next" block is set with a 
+new random block.
+
+Also the cheat function will override whatever the next block is, so you will 
+see it in the preview.
+
+Graphically, I needed to increase the size of the window to add new GUI elements. 
+A simple hack I did was to override the TetrisRoot class in the graphics interface. 
+I probably should have just used TK directly instead, but this seemed to work well 
+and did not affect the original game or the enhanced game.
+
+I reused the TetrisCanvas class to make a new small canvas above the main canvas 
+in which I draw the next block.
+
+To run using 'ruby hw6runner.rb challenge', I added to 'hw6runner.rb' a new
+method 'runMyTetrisChallenge' that will call 'MyTetrisChallenge.new' and then 
+'mainLoop'. Also in the 'if' statement, I addend a new clause for "challenge" 
+that calls this method. I think this is how the assignment requested I do it. 
+Code is below if not.
+
+
+
+
+
+
+
+
+
+
+# hw6runner.rb
+
+
+require_relative './hw6provided'
+require_relative './hw6assignment'
+
+def runTetris
+  Tetris.new 
+  mainLoop
+end
+
+def runMyTetris
+  MyTetris.new
+  mainLoop
+end
+
+def runMyTetrisChallenge
+  MyTetrisChallenge.new
+  mainLoop
+end
+
+if ARGV.count == 0
+  runMyTetris
+elsif ARGV.count != 1
+  puts "usage: hw6runner.rb [enhanced | original | challenge]"
+elsif ARGV[0] == "enhanced"
+  runMyTetris
+elsif ARGV[0] == "original"
+  runTetris
+elsif ARGV[0] == "challenge"
+  runMyTetrisChallenge
+else
+  puts "usage: hw6runner.rb [enhanced | original | challenge]"
+end
